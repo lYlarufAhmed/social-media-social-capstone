@@ -34,8 +34,8 @@ export default function AuthWrapper({
             setError('')
             setSuccess(false)
             if (success) {
-                if (formName === 'login') history.push('/')
-                else history.push('/login')
+                // if (formName === 'login') history.push('/')
+                if (formName !== 'login') history.push('/login')
             }
         }, 1000)
         return () => clearTimeout(timerId)

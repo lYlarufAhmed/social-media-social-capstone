@@ -5,11 +5,9 @@ import * as yup from "yup";
 import {useFormik} from "formik";
 import {Avatar, InputLeftElement, LinkBox, Text} from "@chakra-ui/react";
 import {LockIcon} from "@chakra-ui/icons";
-import {useHistory} from 'react-router-dom'
 import CustomInputField from "./CustomInputField";
 
 const validationSchema = yup.object({
-
     username: yup
         .string('Username')
         .required('username is required!'),
@@ -46,7 +44,8 @@ export default function Login({login}) {
                     setSuccess(true)
                     localStorage.setItem('programming-pair-refreshToken', resJson.refreshToken)
                     localStorage.setItem('programming-pair-accessToken', resJson.accessToken)
-                    login()
+                    // dispatch(setUsername(resJson.username))
+                    login(resJson.username)
                 }
             } catch (e) {
                 setError('Server not found')

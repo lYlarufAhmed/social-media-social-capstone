@@ -10,4 +10,4 @@
 
 30
 10:30- 12: 30: fixing bug and changing metarial to chara ui framework
-14:00- 16:00: chakra ui transformation part 2 done
+14:00- 16:30: chakra ui transformation part 2 done

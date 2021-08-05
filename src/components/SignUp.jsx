@@ -1,9 +1,9 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {Link} from "react-router-dom";
 import AuthWrapper from "./AuthWrapper";
 import {useFormik} from 'formik'
 import * as yup from 'yup'
-import {Box, Input, Text, Link as visualLink, LinkBox} from "@chakra-ui/react";
+import {Box, Input, Text, LinkBox} from "@chakra-ui/react";
 import CustomInputField from "./CustomInputField";
 
 
