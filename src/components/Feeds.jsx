@@ -37,9 +37,14 @@ function Feeds(props) {
     return (
 
         <AuthenticatedPageWrapper>
-            <Flex>
-                <Flex direction={'column'} alignItems={'center'} grow={1} justifyContent={'space-evenly'}
-                      height={'100%'}>
+            <Flex
+                height={'100%'}
+            >
+                <Flex direction={'column'}
+                      alignItems={'center'}
+                      grow={1}
+                    //   justifyContent={'space-evenly'}
+                >
                     <Heading variant={'h5'} mb={3}>Feeds</Heading>
                     {feeds.map((f, i) => <PostCard key={f._id}
                                                    {...f}
