@@ -30,7 +30,7 @@ export default function Login({login}) {
             setError('')
             setSuccess(false)
             try {
-                let res = await fetch('http://localhost:3131/users/login', {
+                let res = await fetch('https://programming-pair-back.herokuapp.com/users/login', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
