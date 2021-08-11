@@ -57,12 +57,13 @@ export const getSuggestions = () => {
 }
 export default function logOut() {
     return async function (dispatch) {
-        let res = await axios.get('/users/logout')
-        if (res.status === 200) {
-            dispatch(setAuthenticated(false))
-            dispatch(setUsername(null))
-            localStorage.setItem('programming-pair-accessToken', '')
-            localStorage.setItem('programming-pair-refreshToken', '')
-        } else dispatch(setError('Error in request'))
+        // let res = await axios.get('/users/logout')
+        // console.log(res)
+        // if (res.status === 200) {
+        dispatch(setAuthenticated(false))
+        dispatch(setUsername(null))
+        localStorage.setItem('programming-pair-accessToken', '')
+        localStorage.setItem('programming-pair-refreshToken', '')
+        // } else dispatch(setError('Error in request'))
     }
 }

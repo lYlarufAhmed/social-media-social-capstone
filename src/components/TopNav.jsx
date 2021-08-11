@@ -2,11 +2,18 @@ import {Button, Flex, Heading, Spacer} from "@chakra-ui/react";
 import {useDispatch, useSelector} from "react-redux";
 import logOut from "../redux/actions";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 export default function TopNav(props) {
     const dispatch = useDispatch()
     const username = useSelector(state => state.user.username)
-    const logout = () => dispatch(logOut())
+    const logout = async () => {
+
+        const res = await axios.post('/users/logout', {username: username})
+        console.log(res.status)
+        dispatch(logOut())
+
+    }
     return (
         <Flex width={'100%'} alignItems={'center'} justifyContent={'space-between'}
               height={'min-content'}>
