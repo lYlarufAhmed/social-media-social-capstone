@@ -12,9 +12,9 @@ import logOut, {setAuthenticated, setUsername} from "../redux/actions";
 import Profile from "./Profile";
 
 const setupInterceptor = (history, login, logout) => {
-    // axios.defaults.baseURL = 'https://programming-pair-back.herokuapp.com'
+    axios.defaults.baseURL = 'https://programming-pair-back.herokuapp.com'
 
-    axios.defaults.baseURL = 'http://localhost:3131'
+    // axios.defaults.baseURL = 'http://localhost:3131'
     // request interceptors will insert authorization header
     axios.interceptors.request.use(function (config) {
         let accessToken = localStorage.getItem('programming-pair-accessToken')
