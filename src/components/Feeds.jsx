@@ -8,7 +8,7 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogContent,
-    AlertDialogOverlay, Button, Textarea, Flex, Heading,
+    AlertDialogOverlay, Button, Textarea, Flex, Heading, Spinner,
 } from "@chakra-ui/react";
 import PostCard from "./PostCard";
 import ProfileCard from "./ProfileCard";
@@ -17,14 +17,22 @@ import {getSuggestions, setPosts} from "../redux/actions";
 import AuthenticatedPageWrapper from "./AuthenticatedPageWrapper";
 
 function Feeds(props) {
+    let [postLoading, setPostLoading] = React.useState(false)
+    let [suggestionLoading, setSuggestionLoading] = React.useState(false)
     let feeds = useSelector(state => state.user.feeds)
     let suggestions = useSelector(state => state.user.suggestions)
     let dispatch = useDispatch()
     const [isOpen, setIsOpen] = React.useState(false)
 
     React.useEffect(() => {
-        dispatch(setPosts())
-        dispatch(getSuggestions())
+        setPostLoading(true)
+        dispatch(setPosts()).finally(() => {
+            setPostLoading(false)
+        })
+        setSuggestionLoading(true)
+        dispatch(getSuggestions()).finally(() => {
+            setSuggestionLoading(false)
+        })
     }, [dispatch])
     const createPost = async (data) => {
         let dataObj = {content: data}
@@ -46,8 +54,14 @@ function Feeds(props) {
                     //   justifyContent={'space-evenly'}
                 >
                     <Heading variant={'h5'} mb={3}>Feeds</Heading>
-                    {feeds.map((f, i) => <PostCard key={f._id}
-                                                   {...f}
+                    {postLoading ? <Spinner
+                        thickness="4px"
+                        speed="0.65s"
+                        emptyColor="gray.200"
+                        color="blue.500"
+                        size="xl"
+                    /> : feeds.map((f, i) => <PostCard key={f._id}
+                                                       {...f}
                     />)}
 
                 </Flex>
@@ -57,7 +71,13 @@ function Feeds(props) {
                       alignItems={'center'} height={'max-content'}>
                     <Heading variant={'h5'} mb={3}>Suggestions</Heading>
                     <Flex flexWrap={'wrap'} justifyContent={'space-evenly'} width={'100%'}>
-                        {suggestions.map(s => <ProfileCard key={s.username} {...s}/>)}
+                        {suggestionLoading ? <Spinner
+                            thickness="4px"
+                            speed="0.65s"
+                            emptyColor="gray.200"
+                            color="blue.500"
+                            size="xl"
+                        /> : suggestions.map(s => <ProfileCard key={s.username} {...s}/>)}
                     </Flex>
                 </Flex>
                 <IconButton flexGrow={0} aria-label="Create Post"
