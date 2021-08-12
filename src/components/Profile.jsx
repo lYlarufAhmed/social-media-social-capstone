@@ -79,7 +79,8 @@ export default function Profile(props) {
                             ><Text fontSize={'sm'} fontWeight={'bolder'}>@{username}</Text>
                                 {currUsername !== username &&
                                 <Button
-                                    aria-label={'follow-button'} isLoading={loadingFollow} colorScheme={'blue'}
+                                    aria-label={'follow-button'} isLoading={loadingFollow}
+                                    colorScheme={following ? 'red' : 'blue'}
                                     varant={following ? 'ghost' : 'solid'} size={'xs'}
                                     m={3} onClick={handleFollow}>{following ? 'Unfollow' : 'Follow'}</Button>}</Flex>
                             <Text>{followersCount} followers {userData.followings.length} following</Text>
