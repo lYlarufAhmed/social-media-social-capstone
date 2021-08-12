@@ -6,11 +6,9 @@ import axios from "axios";
 import {setError} from "../redux/actions";
 import {Link} from "react-router-dom";
 
-export default function ProfileCard({username, followers, isFollowing}) {
+function useFollowing(currUsername, username, isFollowing, setFollowersCount) {
     const [loading, setLoading] = React.useState(false)
-    const [followersCount, setFollowersCount] = React.useState(followers)
     const [following, setFollowing] = React.useState(isFollowing)
-    const currUsername = useSelector(state => state.user.username)
     const handleFollow = async () => {
         setLoading(true)
         try {
@@ -30,6 +28,34 @@ export default function ProfileCard({username, followers, isFollowing}) {
         }
         setLoading(false)
     }
+    return [loading, handleFollow, following]
+}
+
+export default function ProfileCard({username, followers, isFollowing}) {
+    // const [loading, setLoading] = React.useState(false)
+    const [followersCount, setFollowersCount] = React.useState(followers)
+    // const [following, setFollowing] = React.useState(isFollowing)
+    const currUsername = useSelector(state => state.user.username)
+    const [loading, handleFollow, following] = useFollowing(currUsername, username, isFollowing, setFollowersCount)
+    // const handleFollow = async () => {
+    //     setLoading(true)
+    //     try {
+    //         let res = await axios.patch('/users', {
+    //             payload: {
+    //                 followerUsername: currUsername,
+    //                 followedUsername: username
+    //             }, action: following ? 'unfollow' : 'follow'
+    //         })
+    //         if (res.data.success) {
+    //             setFollowing(prevState => !prevState)
+    //             setFollowersCount(prevState => following ? prevState - 1 : prevState + 1)
+    //         }
+    //
+    //     } catch (e) {
+    //         setError(e.message)
+    //     }
+    //     setLoading(false)
+    // }
     return (
         <Flex direction={'column'} height={'min-content'} p={4} border={'1px solid'} flexBasis={'40%'}>
             <Link to={`/profile/${username}`}>

@@ -12,7 +12,7 @@ import logOut, {setAuthenticated, setUsername} from "../redux/actions";
 import Profile from "./Profile";
 
 const setupInterceptor = (history, login, logout) => {
-    axios.defaults.baseURL = 'https://programming-pair-back.herokuapp.com'
+    axios.defaults.baseURL = process.env.REACT_APP_BASE_URL || 'https://programming-pair-back.herokuapp.com'
 
     // axios.defaults.baseURL = 'http://localhost:3131'
     // request interceptors will insert authorization header
